@@ -1,0 +1,1318 @@
+{
+	"info": {
+		"_postman_id": "acd20be1-71c5-4336-9bb8-f222fab1da4b",
+		"name": "Verifier",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31280100"
+	},
+	"item": [
+		{
+			"name": "Testing Tasks",
+			"item": [
+				{
+					"name": "tasks",
+					"item": [
+						{
+							"name": "Get all tasks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"pm.environment.set(\"taskId\", response[4].id);\r",
+											"\r",
+											"pm.test(\"Test data type of the response\", () => {\r",
+											"    for (var i = 0; i < response.length; i++ ){\r",
+											"  pm.expect(response[i].id).to.be.an(\"number\");\r",
+											"  pm.expect(response[i].title).to.be.a(\"string\");\r",
+											"  pm.expect(response[i].answer).to.be.a(\"string\");\r",
+											"  pm.expect(response[i].text).to.be.a(\"string\");\r",
+											"}})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"let response = pm.response.json(),\r",
+											"taskData = JSON.stringify(response);\r",
+											"pm.environment.set(\"taskData\", taskData);\r",
+											"\r",
+											"pm.test(\"The answer is a string\", () => {\r",
+											"    const responseJson = pm.response.json();\r",
+											"    pm.expect(responseJson.answer).to.be.a('string');\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/tasks/{{taskId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"{{taskId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change the whole task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", () => {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n  \"text\": \"stfding\",\r\n  \"answer\": \"hng\",\r\n  \"title\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/tasks/?id={{taskId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{taskId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change some data in a task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \r\n  \"text\": \"stfding\",\r\n  \"answer\": \"hng\",\r\n  \"title\": \"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/tasks/?id={{taskId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "{{taskId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", () => {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"let response = pm.response.json(),\r",
+											"randomTask = JSON.stringify(response);\r",
+											"pm.environment.set(\"randomTask\", randomTask);\r",
+											"let randomTaskId = response.id\r",
+											"pm.environment.set(\"randomTaskId\", randomTaskId);\r",
+											"\r",
+											"const jsonData = pm.response.json();\r",
+											"pm.test(\"Test data type of the response\", () => {\r",
+											"  pm.expect(jsonData).to.be.an(\"object\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"text\": \"{{$randomCatchPhrase}}\",\r\n  \"answer\": \"{{$randomBoolean}}\",\r\n  \"title\": \"{{$randomCity}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a task",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", () => {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/tasks/{{randomTaskId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"tasks",
+										"{{randomTaskId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new task Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", () => {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"let response = pm.response.json(),\r",
+											"randomTask = JSON.stringify(response);\r",
+											"pm.environment.set(\"randomTask\", randomTask);\r",
+											"let randomTaskId = response.id\r",
+											"pm.environment.set(\"randomTaskId\", randomTaskId);\r",
+											"\r",
+											"const jsonData = pm.response.json();\r",
+											"pm.test(\"Test data type of the response\", () => {\r",
+											"  pm.expect(jsonData).to.be.an(\"object\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"text\": \"{{$randomCatchPhrase}}\",\r\n  \"answer\": \"{{$randomBoolean}}\",\r\n  \"title\": \"{{$randomCity}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user-tasks",
+					"item": [
+						{
+							"name": "Get all users-tasks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"pm.environment.set(\"task-user-Id\", response[1].id);\r",
+											"\r",
+											"pm.test(\"Test data type of the response\", () => {\r",
+											"    for (var i = 0; i < response.length; i++ ){\r",
+											"  pm.expect(response[i].id).to.be.an(\"number\");\r",
+											"  pm.expect(response[i].isSolved).to.be.a(\"boolean\");\r",
+											"  pm.expect(response[i].taskTitle).to.be.a(\"string\");\r",
+											"  pm.expect(response[i].username).to.be.a(\"string\");\r",
+											"}})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/user-tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user-tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a task for a user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"pm.test(\"Test data type of the response\", () => {\r",
+											"  pm.expect(response.id).to.be.an(\"number\");\r",
+											"  pm.expect(response.isSolved).to.be.a(\"boolean\");\r",
+											"  pm.expect(response.user).to.be.a(\"string\");\r",
+											"  pm.expect(response.task).to.be.a(\"string\");\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/user-tasks/{{task-user-Id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user-tasks",
+										"{{task-user-Id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change data in a task for a user Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n    \"isSolved\": true,\r\n    \"user\": {\r\n        \"id\": 1089,\r\n        \"login\": \"Christop.Keebler54\",\r\n        \"firstName\": \"Paula\",\r\n        \"lastName\": \"Muller\",\r\n        \"email\": \"Emile82@hotmail.com\",\r\n        \"activated\": true,\r\n        \"langKey\": \"en\",\r\n        \"imageUrl\": \"string\",\r\n        \"resetDate\": \"2023-11-29T01:10:30.602Z\"\r\n    },\r\n    \"task\": {{randomTask}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/user-tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user-tasks"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1153",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change some data in a task for a user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", () => {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n    \"isSolved\": true,\r\n    \"user\": {\r\n        \"id\": 1089,\r\n        \"login\": \"Christop.Keebler54\",\r\n        \"firstName\": \"Paula\",\r\n        \"lastName\": \"Muller\",\r\n        \"email\": \"Emile82@hotmail.com\",\r\n        \"activated\": true,\r\n        \"langKey\": \"en\",\r\n        \"imageUrl\": \"string\",\r\n        \"resetDate\": \"2023-11-29T01:10:30.602Z\"\r\n    },\r\n    \"task\": {{taskData}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/user-tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user-tasks"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1153",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Assign a task for a user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", () => {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"const response = pm.response.json()\r",
+											"pm.test(\"Test data type of the response\", () => {\r",
+											"  pm.expect(response.id).to.be.an(\"number\");\r",
+											"  pm.expect(response.isSolved).to.be.a(\"boolean\");\r",
+											"  pm.expect(response.user).to.be.a(\"object\");\r",
+											"})\r",
+											"\r",
+											"var jsonReq = JSON.parse(responseBody)\r",
+											"pm.test(\"Validate login\", function () {\r",
+											"    pm.expect(jsonReq.user.login).to.eql(\"christop.keebler54\")\r",
+											"})\r",
+											"\r",
+											"let randomUserTaskId = response.id\r",
+											"pm.environment.set(\"randomUserTaskId\", randomUserTaskId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"isSolved\": true,\r\n    \"user\": {\r\n        \"id\": 1089,\r\n        \"login\": \"Christop.Keebler54\",\r\n        \"firstName\": \"Paula\",\r\n        \"lastName\": \"Muller\",\r\n        \"email\": \"Emile82@hotmail.com\",\r\n        \"activated\": true,\r\n        \"langKey\": \"en\",\r\n        \"imageUrl\": \"string\",\r\n        \"resetDate\": \"2023-11-29T01:10:30.602Z\"\r\n    },\r\n    \"task\": {{randomTask}}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/user-tasks",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user-tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a task for a user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", () => {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{accessToken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/user-tasks/{{randomUserTaskId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"user-tasks",
+										"{{randomUserTaskId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "user and account",
+			"item": [
+				{
+					"name": "status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{websiteUrl}}",
+							"host": [
+								"{{websiteUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authentication ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()\r",
+									"pm.environment.set(\"adminToken\", response.id_token);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonReq = JSON.parse(request.data)\r",
+									"pm.test(\"Validate username\", function () {\r",
+									"    pm.expect(jsonReq.username).to.eql(\"admin\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Validate password\", function () {\r",
+									"    pm.expect(jsonReq.password).to.eql(\"admin\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin\",\r\n  \"rememberMe\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/authenticate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"passwordTest\", \"admin\");\r",
+									"pm.collectionVariables.get(\"passwordTest\");\r",
+									"\r",
+									"var jsonReq = JSON.parse(request.data)\r",
+									"pm.test(\"Validate authorities\", function () {\r",
+									"    pm.expect(jsonReq.authorities).to.eql([\r",
+									"    \"ROLE_USER_ADMIN\"])\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"id\": 0,\r\n  \"login\": \"{{$randomUserName}}\",\r\n  \"firstName\": \"{{$randomFirstName}}\",\r\n  \"lastName\": \"{{$randomLastName}}\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"imageUrl\": \"string\",\r\n  \"activated\": true,\r\n  \"langKey\": \"en\",\r\n  \"createdBy\": \"string\",\r\n  \"createdDate\": \"2023-11-24T17:19:36.733Z\",\r\n  \"lastModifiedBy\": \"string\",\r\n  \"lastModifiedDate\": \"2023-11-24T17:19:36.733Z\",\r\n  \"authorities\": [\r\n    \"ROLE_USER_ADMIN\"\r\n  ],\r\n  \"password\": \"{{$randomPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get data of a specific account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if the account is activated\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.activated).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"The account properties of login are correct\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.login).to.be.a('string')\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users/{{userLogin}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users",
+								"{{userLogin}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonReq = JSON.parse(request.data)\r",
+									"pm.test(\"Validate password\", function () {\r",
+									"    pm.expect(jsonReq.newPassword).to.eql(\"admin\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Check the active environment\", () => {\r",
+									"  pm.expect(pm.environment.name).to.eql(\"Verifier\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"currentPassword\": \"{{passwordTest}}\",\r\n  \"newPassword\": \"{{passwordTest}}\"\r\n} \r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/account/change-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "valentinamivl@gmail.com\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/account/reset-password/init",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"account",
+								"reset-password",
+								"init"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activate account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody)\r",
+									"pm.environment.set(\"userLogin\", jsonData.login)\r",
+									"\r",
+									"pm.test(\"Person is Juston\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.firstName).to.eql(\"Juston\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Email of Juston is correct\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.email).to.eql(\"thad92@hotmail.com\")\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1073,\r\n {{user1073}}\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/admin/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "websiteUrl",
+			"value": "https://sqlverifier-50d286d70656.herokuapp.com/api/tasks"
+		},
+		{
+			"key": "accessToken",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwMzY4NzMyNCwiYXV0aCI6IlJPTEVfQURNSU4iLCJpYXQiOjE3MDEwOTUzMjR9.3XQKXwit8lOBRzvfzQljne_YhF7InB9VpzsKAnYrXacutCVng2gFUs6lM0IPT9k-cKfuZV4OuM-7RWoqRqDa7g",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "adminToken",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcwMzQ0NDE2NCwiYXV0aCI6IlJPTEVfQURNSU4iLCJpYXQiOjE3MDA4NTIxNjR9.f-ulY2Loo1sQ-pMOhh2r7gYr9tOo4eKX0SyWbSoCEd7tA1eWu5HZCjq85ajXzFqU6UCOUikykqvXLKq0oUuOUA",
+			"type": "string"
+		},
+		{
+			"key": "user1031",
+			"value": "  \"login\": \"Daron.Prohaska94\",\n  \"firstName\": \"Gertrude\",\n  \"lastName\": \"Cary\",\n  \"email\": \"Tyree80@gmail.com\",\n  \"imageUrl\": \"string\",\n  \"activated\": true,\n  \"langKey\": \"en\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"2023-11-24T17:19:36.733Z\",\n  \"lastModifiedBy\": \"string\",\n  \"lastModifiedDate\": \"2023-11-24T17:19:36.733Z\",\n  \"authorities\": [\n    \"ROLE_USER_STUDENT\"]",
+			"type": "string"
+		},
+		{
+			"key": "user1032",
+			"value": "\"login\": \"Brent_Kreiger52\",\n  \"firstName\": \"Nathanial\",\n  \"lastName\": \"Rosa\",\n  \"email\": \"Colton.Ledner55@yahoo.com\",\n  \"imageUrl\": \"string\",\n  \"activated\": true,\n  \"langKey\": \"en\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"2023-11-24T17:19:36.733Z\",\n  \"lastModifiedBy\": \"string\",\n  \"lastModifiedDate\": \"2023-11-24T17:19:36.733Z\",\n  \"authorities\": [\n    \"ROLE_USER_STUDENT\"\n  ]",
+			"type": "string"
+		},
+		{
+			"key": "user1034",
+			"value": "\"login\": \"Aaron53\",\n  \"firstName\": \"Luella\",\n  \"lastName\": \"Ludie\",\n  \"email\": \"Eino97@yahoo.com\",\n  \"imageUrl\": \"string\",\n  \"activated\": true,\n  \"langKey\": \"en\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"2023-11-24T17:19:36.733Z\",\n  \"lastModifiedBy\": \"string\",\n  \"lastModifiedDate\": \"2023-11-24T17:19:36.733Z\",\n  \"authorities\": [\n    \"ROLE_USER_STUDENT\"\n  ]",
+			"type": "string"
+		},
+		{
+			"key": "user1037",
+			"value": "\"login\": \"Ramiro_Haag44\",\n  \"firstName\": \"Shea\",\n  \"lastName\": \"Bella\",\n  \"email\": \"Destiney_Greenholt@yahoo.com\",\n  \"imageUrl\": \"string\",\n  \"activated\": true,\n  \"langKey\": \"en\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"2023-11-24T17:19:36.733Z\",\n  \"lastModifiedBy\": \"string\",\n  \"lastModifiedDate\": \"2023-11-24T17:19:36.733Z\",\n  \"authorities\": [\n    \"ROLE_USER_STUDENT\"\n  ]",
+			"type": "string"
+		},
+		{
+			"key": "passwordTest",
+			"value": ""
+		},
+		{
+			"key": "user1073",
+			"value": "\"login\": \"Mara24\",\n  \"firstName\": \"Juston\",\n  \"lastName\": \"Jamel\",\n  \"email\": \"Thad92@hotmail.com\",\n  \"imageUrl\": \"string\",\n  \"activated\": true,\n  \"langKey\": \"en\",\n  \"createdBy\": \"string\",\n  \"createdDate\": \"2023-11-24T17:19:36.733Z\",\n  \"lastModifiedBy\": \"string\",\n  \"lastModifiedDate\": \"2023-11-24T17:19:36.733Z\",\n  \"authorities\": [\n    \"ROLE_USER_ADMIN\"\n  ]",
+			"type": "string"
+		}
+	]
+}
