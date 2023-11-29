@@ -1,0 +1,653 @@
+{
+	"id": "502a9f48-828f-4a21-8684-623034a36e85",
+	"name": "Verifier",
+	"timestamp": "2023-11-29T05:35:11.276Z",
+	"collection_id": "31280100-acd20be1-71c5-4336-9bb8-f222fab1da4b",
+	"folder_id": "31280100-d36102ae-095f-4a99-b486-9cdd3320e01e",
+	"environment_id": "31280100-7b24487f-044b-4c56-b670-6cc3136e1f54",
+	"totalPass": 64,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-11-29T05:35:01.209Z",
+	"totalFail": 20,
+	"results": [
+		{
+			"id": "f76b2a3d-879b-430e-a5e6-e1cdfa8d444b",
+			"name": "Get all tasks",
+			"url": "http://localhost:8080/api/tasks",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 4,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				25,
+				8,
+				7,
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "afa49237-9d38-409c-9722-d11cc7ac191d",
+			"name": "Get a task",
+			"url": "http://localhost:8080/api/tasks/1110",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"The answer is a string": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 4,
+					"fail": 0
+				},
+				"The answer is a string": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				6,
+				5,
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"The answer is a string": true
+				},
+				{
+					"Status code is 200": true,
+					"The answer is a string": true
+				},
+				{
+					"Status code is 200": true,
+					"The answer is a string": true
+				},
+				{
+					"Status code is 200": true,
+					"The answer is a string": true
+				}
+			]
+		},
+		{
+			"id": "a53e118a-a9ea-418f-a051-b67d07c1cd7c",
+			"name": "Change the whole task",
+			"url": "http://localhost:8080/api/tasks/?id=1110",
+			"time": 5,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status code is 204": false
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 0,
+					"fail": 4
+				}
+			},
+			"times": [
+				5,
+				5,
+				5,
+				5
+			],
+			"allTests": [
+				{
+					"Status code is 204": false
+				},
+				{
+					"Status code is 204": false
+				},
+				{
+					"Status code is 204": false
+				},
+				{
+					"Status code is 204": false
+				}
+			]
+		},
+		{
+			"id": "41ee9d00-f137-46ff-b642-d86e3e19a6f2",
+			"name": "Change some data in a task",
+			"url": "http://localhost:8080/api/tasks/?id=1110",
+			"time": 6,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status code is 200": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 4
+				}
+			},
+			"times": [
+				6,
+				5,
+				5,
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				}
+			]
+		},
+		{
+			"id": "4e287aba-e8b8-4af8-bdff-b7b5eada122b",
+			"name": "Create a new task",
+			"url": "http://localhost:8080/api/tasks",
+			"time": 10,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 4,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				8,
+				7,
+				8,
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "7f2b8b85-b338-4208-a738-f7822a699e25",
+			"name": "Delete a task",
+			"url": "http://localhost:8080/api/tasks/1136",
+			"time": 8,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				7,
+				8,
+				7,
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 204": true
+				},
+				{
+					"Status code is 204": true
+				},
+				{
+					"Status code is 204": true
+				},
+				{
+					"Status code is 204": true
+				}
+			]
+		},
+		{
+			"id": "eb7ce87b-3944-477b-8426-25eb92d87b63",
+			"name": "Create a new task Copy",
+			"url": "http://localhost:8080/api/tasks",
+			"time": 10,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 4,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
+				7,
+				8,
+				10
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "01e98a88-763b-42b4-8150-42d3b59d45f1",
+			"name": "Get all users-tasks",
+			"url": "http://localhost:8080/api/user-tasks",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test data type of the response": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 4,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
+				8,
+				7,
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": true
+				}
+			]
+		},
+		{
+			"id": "0f2f1906-daf4-45fc-96fc-82d40d9683dd",
+			"name": "Get a task for a user",
+			"url": "http://localhost:8080/api/user-tasks/1154",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true,
+				"Test data type of the response": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 4,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 0,
+					"fail": 4
+				}
+			},
+			"times": [
+				6,
+				5,
+				6,
+				6
+			],
+			"allTests": [
+				{
+					"Status code is 200": true,
+					"Test data type of the response": false
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": false
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": false
+				},
+				{
+					"Status code is 200": true,
+					"Test data type of the response": false
+				}
+			]
+		},
+		{
+			"id": "119644d0-3f9b-4155-b797-c405c27347b2",
+			"name": "Change data in a task for a user Copy",
+			"url": "http://localhost:8080/api/user-tasks?id=1153",
+			"time": 8,
+			"responseCode": {
+				"code": 405,
+				"name": "Method Not Allowed"
+			},
+			"tests": {
+				"Status code is 200": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 4
+				}
+			},
+			"times": [
+				7,
+				7,
+				7,
+				8
+			],
+			"allTests": [
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				}
+			]
+		},
+		{
+			"id": "af09b5ff-1fc2-46b2-a7b4-f0b161b0e9bc",
+			"name": "Change some data in a task for a user",
+			"url": "http://localhost:8080/api/user-tasks/?id=1153",
+			"time": 7,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Status code is 200": false
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 0,
+					"fail": 4
+				}
+			},
+			"times": [
+				7,
+				5,
+				7,
+				7
+			],
+			"allTests": [
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				},
+				{
+					"Status code is 200": false
+				}
+			]
+		},
+		{
+			"id": "a6f324da-351b-4118-a440-ff6987191370",
+			"name": "Assign a task for a user",
+			"url": "http://localhost:8080/api/user-tasks",
+			"time": 9,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Status code is 201": true,
+				"Test data type of the response": true,
+				"Validate login": true
+			},
+			"testPassFailCounts": {
+				"Status code is 201": {
+					"pass": 4,
+					"fail": 0
+				},
+				"Test data type of the response": {
+					"pass": 4,
+					"fail": 0
+				},
+				"Validate login": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				7,
+				7,
+				10,
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true,
+					"Validate login": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true,
+					"Validate login": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true,
+					"Validate login": true
+				},
+				{
+					"Status code is 201": true,
+					"Test data type of the response": true,
+					"Validate login": true
+				}
+			]
+		},
+		{
+			"id": "4ff0926b-f0fd-4dfb-92ee-21bec826a094",
+			"name": "Delete a task for a user",
+			"url": "http://localhost:8080/api/user-tasks/1175",
+			"time": 9,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Status code is 204": true
+			},
+			"testPassFailCounts": {
+				"Status code is 204": {
+					"pass": 4,
+					"fail": 0
+				}
+			},
+			"times": [
+				8,
+				8,
+				8,
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 204": true
+				},
+				{
+					"Status code is 204": true
+				},
+				{
+					"Status code is 204": true
+				},
+				{
+					"Status code is 204": true
+				}
+			]
+		}
+	],
+	"count": 4,
+	"totalTime": 385,
+	"collection": {
+		"requests": [
+			{
+				"id": "f76b2a3d-879b-430e-a5e6-e1cdfa8d444b",
+				"method": "GET"
+			},
+			{
+				"id": "afa49237-9d38-409c-9722-d11cc7ac191d",
+				"method": "GET"
+			},
+			{
+				"id": "a53e118a-a9ea-418f-a051-b67d07c1cd7c",
+				"method": "PUT"
+			},
+			{
+				"id": "41ee9d00-f137-46ff-b642-d86e3e19a6f2",
+				"method": "PATCH"
+			},
+			{
+				"id": "4e287aba-e8b8-4af8-bdff-b7b5eada122b",
+				"method": "POST"
+			},
+			{
+				"id": "7f2b8b85-b338-4208-a738-f7822a699e25",
+				"method": "DELETE"
+			},
+			{
+				"id": "eb7ce87b-3944-477b-8426-25eb92d87b63",
+				"method": "POST"
+			},
+			{
+				"id": "01e98a88-763b-42b4-8150-42d3b59d45f1",
+				"method": "GET"
+			},
+			{
+				"id": "0f2f1906-daf4-45fc-96fc-82d40d9683dd",
+				"method": "GET"
+			},
+			{
+				"id": "119644d0-3f9b-4155-b797-c405c27347b2",
+				"method": "PUT"
+			},
+			{
+				"id": "af09b5ff-1fc2-46b2-a7b4-f0b161b0e9bc",
+				"method": "PATCH"
+			},
+			{
+				"id": "a6f324da-351b-4118-a440-ff6987191370",
+				"method": "POST"
+			},
+			{
+				"id": "4ff0926b-f0fd-4dfb-92ee-21bec826a094",
+				"method": "DELETE"
+			}
+		]
+	}
+}
